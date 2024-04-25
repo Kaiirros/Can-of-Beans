@@ -66,7 +66,7 @@ class _NavigationExampleState extends State<NavigationExample> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: const Text('Spotify Maps'),
+        title: const Text('Spotify Maps', style: TextStyle(color: Colors.white)),
       ),
       body: PageView(
         controller: _pageController,
