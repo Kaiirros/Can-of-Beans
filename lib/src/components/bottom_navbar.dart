@@ -47,7 +47,7 @@ class _NavigationExampleState extends State<NavigationExample> {
     _selectedPageIndex = 0;
     _pages = [
       HomePage(),
-      MapPage(),
+      const MapPage(),
       SettingsPage()
     ];
 

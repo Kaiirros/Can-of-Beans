@@ -9,7 +9,7 @@ import 'package:latlng/latlng.dart';
 import 'package:map/map.dart';
 
 class MapPage extends StatefulWidget {
-  const MapPage({Key? key}) : super(key: key);
+  const MapPage({super.key});
 
   @override
   MarkersPageState createState() => MarkersPageState();

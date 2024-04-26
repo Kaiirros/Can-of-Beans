@@ -17,7 +17,6 @@ dependencies:
   latlng: ^2.0.2
   cached_network_image: ^3.2.0
   platform: ^3.1.0
-  go_router: any
   map: any
 
 dev_dependencies:
