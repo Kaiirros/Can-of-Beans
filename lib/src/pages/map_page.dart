@@ -28,7 +28,7 @@ class MarkersPageState extends State<MapPage> {
   ];
 
   void _gotoDefault() {
-    controller.center = const LatLng(Angle.degree(35.68), Angle.degree(51.41));
+    controller.center = const LatLng(Angle.degree(43.16), Angle.degree(-77.61));
     setState(() {});
   }
 
@@ -94,9 +94,6 @@ class MarkersPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Markers'),
-      ),
       body: MapLayout(
         controller: controller,
         builder: (context, transformer) {
@@ -105,19 +102,6 @@ class MarkersPageState extends State<MapPage> {
           final markerWidgets = markerPositions.map(
             (pos) => _buildMarkerWidget(pos, Colors.red),
           );
-
-          final homeLocation = transformer
-              .toOffset(const LatLng(Angle.degree(35.68), Angle.degree(51.42)));
-
-          final homeMarkerWidget =
-              _buildMarkerWidget(homeLocation, Colors.black, Icons.home);
-
-          final centerLocation = Offset(
-              transformer.constraints.biggest.width / 2,
-              transformer.constraints.biggest.height / 2);
-
-          final centerMarkerWidget =
-              _buildMarkerWidget(centerLocation, Colors.purple);
 
           return GestureDetector(
             behavior: HitTestBehavior.opaque,
@@ -160,9 +144,7 @@ class MarkersPageState extends State<MapPage> {
                       );
                     },
                   ),
-                  homeMarkerWidget,
                   ...markerWidgets,
-                  centerMarkerWidget,
                 ],
               ),
             ),

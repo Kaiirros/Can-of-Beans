@@ -18,6 +18,8 @@ dependencies:
   cached_network_image: ^3.2.0
   platform: ^3.1.0
   map: any
+  geolocator: ^11.0.0
+  baseflow_plugin_template: ^2.1.2
 
 dev_dependencies:
   flutter_test:
