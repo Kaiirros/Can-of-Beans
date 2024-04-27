@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:final_project/src/pages/home_page.dart';
 import '../utils/tile_servers.dart';
 import '../utils/utils.dart';
 import 'package:flutter/gestures.dart';
@@ -16,8 +17,12 @@ class MapPage extends StatefulWidget {
 }
 
 class MarkersPageState extends State<MapPage> {
+
+  double currentLong = HomeState.long;
+  double currentLat = HomeState.lat;
+
   final controller = MapController(
-    location: const LatLng(Angle.degree(35.68), Angle.degree(51.41)),
+    location: LatLng(Angle.degree(HomeState.lat), Angle.degree(HomeState.long)),
   );
 
   final markers = [
@@ -28,7 +33,7 @@ class MarkersPageState extends State<MapPage> {
   ];
 
   void _gotoDefault() {
-    controller.center = const LatLng(Angle.degree(43.16), Angle.degree(-77.61));
+    controller.center = LatLng(Angle.degree(HomeState.lat), Angle.degree(HomeState.long));
     setState(() {});
   }
 

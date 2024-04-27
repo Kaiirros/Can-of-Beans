@@ -21,11 +21,10 @@ class _SettingsState extends State<SettingsPage> with AutomaticKeepAliveClientMi
     super.build(context);
      return Scaffold(
       body: ListView(
-        padding: const EdgeInsets.all(2),
         children: <Widget>[
           SwitchListTile(
-            tileColor: Colors.red,
-            title: const Text('Setting 1'),
+            tileColor: Theme.of(context).colorScheme.secondary,
+            title: const Text('Setting 1', style: TextStyle(color: Colors.white)),
             value: setting1,
             onChanged:(bool? value) {
               setState(() {
@@ -34,8 +33,8 @@ class _SettingsState extends State<SettingsPage> with AutomaticKeepAliveClientMi
              },
           ),
           SwitchListTile(
-            tileColor: Colors.red,
-            title: const Text('Setting 2'),
+            tileColor: Theme.of(context).colorScheme.secondary,
+            title: const Text('Setting 2', style: TextStyle(color: Colors.white)),
             value: setting2,
             onChanged:(bool? value) {
               setState(() {
@@ -44,8 +43,8 @@ class _SettingsState extends State<SettingsPage> with AutomaticKeepAliveClientMi
              },
           ),
           SwitchListTile(
-            tileColor: Colors.red,
-            title: const Text('Setting 3'),
+            tileColor: Theme.of(context).colorScheme.secondary,
+            title: const Text('Setting 3', style: TextStyle(color: Colors.white)),
             value: setting3,
             onChanged:(bool? value) {
               setState(() {
@@ -54,8 +53,8 @@ class _SettingsState extends State<SettingsPage> with AutomaticKeepAliveClientMi
              },
           ),
           SwitchListTile(
-            tileColor: Colors.red,
-            title: const Text('Setting 4'),
+            tileColor: Theme.of(context).colorScheme.secondary,
+            title: const Text('Setting 4', style: TextStyle(color: Colors.white)),
             value: setting4,
             onChanged:(bool? value) {
               setState(() {

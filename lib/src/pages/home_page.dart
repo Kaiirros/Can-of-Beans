@@ -9,15 +9,15 @@ class HomePage extends StatefulWidget {
 
   @override
   // ignore: library_private_types_in_public_api
-  _HomeState createState() => _HomeState();
+  HomeState createState() => HomeState();
   
 }
 
 
-class _HomeState extends State<HomePage> with AutomaticKeepAliveClientMixin<HomePage>{
+class HomeState extends State<HomePage> with AutomaticKeepAliveClientMixin<HomePage>{
 
-  var long = "null";
-  var lat = "null";
+  static double long = 0;
+  static double lat = 0;
  
   @override
   void initState(){
@@ -29,7 +29,7 @@ class _HomeState extends State<HomePage> with AutomaticKeepAliveClientMixin<Home
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Center(
-          child: Text("lat: $lat, long: $long"),
+          child: Text("lat: $lat, long: $long", style: const TextStyle( color: Colors.white)),
         ),
       );
   }
@@ -40,13 +40,11 @@ class _HomeState extends State<HomePage> with AutomaticKeepAliveClientMixin<Home
   void setCoords() async{
     Position pos = await _determinePosition();
     setState(() {
-      long = pos.longitude.toString();
-      lat = pos.latitude.toString();
+      long = pos.longitude;
+      lat = pos.latitude;
     });
 
-
   }
-
 }
 
 
