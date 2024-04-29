@@ -1,0 +1,39 @@
+{
+    "music": [
+    {
+        "name": "Song 2",
+        "album": "Blur: The Best Of",
+        "artist": "Blur",
+        "lat": 37.4219000,
+        "long": -122.095
+    },
+    {
+        "name": "Friday I'm in Love",
+        "album": "Wish",
+        "artist": "The Cure",
+        "lat": 37.4219180,
+        "long": -122.066
+    },
+    {
+        "name": "Here Comes Your Man",
+        "album": "Doolittle",
+        "artist": "Pixies",
+        "lat": 37.4219219,
+        "long": -122.090
+    },
+    {
+        "name": "Forest Fire",
+        "album": "In the Land Of",
+        "artist": "Wintersleep",
+        "lat": 37.4239990,
+        "long": -122.105
+    },
+    {
+        "name": "Selfless",
+        "album": "The New Abnormal",
+        "artist": "The Strokes",
+        "lat": 37.4259980,
+        "long": -122.101
+    }
+    ]
+}

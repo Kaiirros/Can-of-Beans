@@ -20,6 +20,7 @@ dependencies:
   map: any
   geolocator: ^11.0.0
   baseflow_plugin_template: ^2.1.2
+  http: ^1.2.1
 
 dev_dependencies:
   flutter_test:
@@ -36,3 +37,4 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
+    - assets/data/music.json

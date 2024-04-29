@@ -2,12 +2,19 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:final_project/src/pages/home_page.dart';
+import 'package:flutter/services.dart';
 import '../utils/tile_servers.dart';
 import '../utils/utils.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:latlng/latlng.dart';
 import 'package:map/map.dart';
+import 'dart:async';
+import 'dart:convert';
+
+import 'dart:developer' as dev;
+
+
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -25,12 +32,23 @@ class MarkersPageState extends State<MapPage> {
     location: LatLng(Angle.degree(HomeState.lat), Angle.degree(HomeState.long)),
   );
 
-  final markers = [
+/*   final markers = [
     const LatLng(Angle.degree(35.674), Angle.degree(51.41)),
     const LatLng(Angle.degree(35.678), Angle.degree(51.41)),
     const LatLng(Angle.degree(35.682), Angle.degree(51.41)),
     const LatLng(Angle.degree(35.686), Angle.degree(51.41)),
-  ];
+  ]; */
+
+  List items = [];
+
+  Future<void> readJson() async{
+    final String response = await rootBundle.loadString('assets/data/music.json');
+    final data = await json.decode(response);
+    setState(() {
+      items = data["music"];
+    });
+  }
+
 
   void _gotoDefault() {
     controller.center = LatLng(Angle.degree(HomeState.lat), Angle.degree(HomeState.long));
@@ -71,7 +89,7 @@ class MarkersPageState extends State<MapPage> {
     }
   }
 
-  Widget _buildMarkerWidget(Offset pos, Color color,
+  Widget buildMarkerWidget(Offset pos, Color color, musicItem,
       [IconData icon = Icons.location_on]) {
     return Positioned(
       left: pos.dx - 24,
@@ -87,8 +105,16 @@ class MarkersPageState extends State<MapPage> {
         onTap: () {
           showDialog(
             context: context,
-            builder: (context) => const AlertDialog(
-              content: Text('You have clicked a marker!'),
+            builder: (context) => AlertDialog(
+              backgroundColor: Theme.of(context).colorScheme.secondary,
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(musicItem["name"], style: const TextStyle(color: Colors.white)),
+                  Text("Artist: ${musicItem["artist"]}", style: const TextStyle(color: Colors.white)),
+                  Text("Album: ${musicItem["album"]}", style: const TextStyle(color: Colors.white))
+                ],
+              ),
             ),
           );
         },
@@ -102,11 +128,19 @@ class MarkersPageState extends State<MapPage> {
       body: MapLayout(
         controller: controller,
         builder: (context, transformer) {
-          final markerPositions = markers.map(transformer.toOffset).toList();
 
-          final markerWidgets = markerPositions.map(
-            (pos) => _buildMarkerWidget(pos, Colors.red),
+          readJson();
+          /* for (int i = 0; i < items.length; i++){
+            dev.log('${items[i]["lat"]}');
+            items.map(transformer.toOffset).toList();
+          } */
+
+          //LatLng(Angle.degree(HomeState.lat), Angle.degree(HomeState.long))
+          final markerWidgets = items.map(
+            (musicItem) => buildMarkerWidget(transformer.toOffset(LatLng(Angle.degree(musicItem["lat"]), Angle.degree(musicItem["long"]))), Colors.red, musicItem),
+
           );
+
 
           return GestureDetector(
             behavior: HitTestBehavior.opaque,
