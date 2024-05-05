@@ -131,12 +131,6 @@ class MarkersPageState extends State<MapPage> {
         builder: (context, transformer) {
 
           readJson();
-          /* for (int i = 0; i < items.length; i++){
-            dev.log('${items[i]["lat"]}');
-            items.map(transformer.toOffset).toList();
-          } */
-
-          //LatLng(Angle.degree(HomeState.lat), Angle.degree(HomeState.long))
           final markerWidgets = items.map(
             (musicItem) => buildMarkerWidget(transformer.toOffset(LatLng(Angle.degree(musicItem["lat"]), Angle.degree(musicItem["long"]))), musicItem),
 
