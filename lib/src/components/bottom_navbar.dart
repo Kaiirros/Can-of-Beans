@@ -2,8 +2,10 @@ import 'package:final_project/src/pages/home_page.dart';
 import 'package:final_project/src/pages/map_page.dart';
 import 'package:final_project/src/pages/settings_page.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'dart:developer' as developer;
 
+StreamController<bool> streamController = StreamController<bool>();
 
 class NavigationBarApp extends StatelessWidget {
   const NavigationBarApp({super.key});
@@ -52,7 +54,7 @@ class NavigationExampleState extends State<NavigationExample> {
 
     _selectedPageIndex = 0;
     _pages = [
-      HomePage(getTheme),
+      HomePage(streamController.stream),
       const MapPage(),
       SettingsPage(toDarkMode),
     ];
@@ -72,6 +74,7 @@ class NavigationExampleState extends State<NavigationExample> {
       developer.log("state");
       darkMode = !darkMode;
     });
+    streamController.add(darkMode);
   }
 
 

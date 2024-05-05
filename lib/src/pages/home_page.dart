@@ -1,14 +1,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'dart:async';
 
 import 'dart:developer' as developer;
 
 // ignore: use_key_in_widget_constructors
 class HomePage extends StatefulWidget {
-  const HomePage(this.darkMode, {super.key});
-  final Function darkMode;
-
+  HomePage(this.themeStream);
+  final Stream themeStream;  
 
   @override
   // ignore: library_private_types_in_public_api
@@ -18,21 +18,31 @@ class HomePage extends StatefulWidget {
 class HomeState extends State<HomePage> with AutomaticKeepAliveClientMixin<HomePage>{
   static double long = 0;
   static double lat = 0;
-  bool theme = false;
+  bool darkTheme = false;
  
   @override
   void initState(){
     super.initState();
     setCoords();
+    widget.themeStream.listen((theme) {
+      setTheme(theme);
+    });
   }
+
+void setTheme(bool theme){
+  setState(() {
+    developer.log("setTheme Homepage");
+    darkTheme = theme;
+  });
+}
 
 
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      backgroundColor: theme? const Color.fromARGB(255, 36, 36, 36) : const Color.fromARGB(255, 188, 188, 188),
+      backgroundColor: darkTheme? const Color.fromARGB(255, 36, 36, 36) : const Color.fromARGB(255, 188, 188, 188),
       body: Center(
-          child: Text("lat: $lat, long: $long", style: const TextStyle( color: Colors.white)),
+          child: darkTheme? Text("lat: $lat, long: $long", style: const TextStyle( color: Colors.white)) : Text("lat: $lat, long: $long", style: const TextStyle( color: Colors.black)),
         ),
       );
   }

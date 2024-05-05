@@ -1,5 +1,3 @@
-
-import 'package:final_project/src/components/bottom_navbar.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:developer' as developer;
@@ -26,6 +24,7 @@ class SettingsState extends State<SettingsPage> with AutomaticKeepAliveClientMix
   Widget build(BuildContext context) {
     super.build(context);
      return Scaffold(
+      backgroundColor: (darkMode ? const Color.fromARGB(255, 36, 36, 36) : const Color.fromARGB(255, 188, 188, 188)),
       body: ListView(
         children: <Widget>[
           SwitchListTile(
