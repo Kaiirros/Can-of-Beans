@@ -72,6 +72,82 @@
         "artist": "Death Cab for Cutie",
         "lat": 37.4179080,
         "long": -122.10211
+    },
+
+
+
+    {
+        "name": "Song 2",
+        "album": "Blur: The Best Of",
+        "artist": "Blur",
+        "lat": 43.0828220,
+        "long": -77.6421020
+    },
+    {
+        "name": "Friday I'm in Love",
+        "album": "Wish",
+        "artist": "The Cure",
+        "lat": 43.0628130,
+        "long": -77.6529010
+    },
+    {
+        "name": "Here Comes Your Man",
+        "album": "Doolittle",
+        "artist": "Pixies",
+        "lat": 43.0728125,
+        "long": -77.6520129
+    },
+    {
+        "name": "Forest Fire",
+        "album": "In the Land Of",
+        "artist": "Wintersleep",
+        "lat": 43.0928125,
+        "long": -77.700000
+    },
+    {
+        "name": "Selfless",
+        "album": "The New Abnormal",
+        "artist": "The Strokes",
+        "lat": 43.0828125,
+        "long": -77.6309010
+    },
+
+
+
+    {
+        "name": "Help I'm Alive",
+        "album": "Fantasies",
+        "artist": "Metric",
+        "lat": 43.0828115,
+        "long": -77.6829010
+    },
+    {
+        "name": "The Ground Walks, with Time in a Box",
+        "album": "Strangers to Ourselves",
+        "artist": "Modest Mouse",
+        "lat": 43.0811125,
+        "long": -77.6329010
+    },
+    {
+        "name": "Obstacle 2",
+        "album": "Turn on the Bright Lights",
+        "artist": "Interpol",
+        "lat": 43.0948125,
+        "long": -77.6719010
+    },
+    {
+        "name": "Say It Ain't So",
+        "album": "Weezer",
+        "artist": "Weezer",
+        "lat": 43.0938125,
+        "long": -77.6824010
+    },
+    {
+        "name": "Cath...",
+        "album": "Narrow Stairs",
+        "artist": "Death Cab for Cutie",
+        "lat": 43.0838115,
+        "long": -77.6929010
     }
     ]
 }
