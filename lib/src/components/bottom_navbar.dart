@@ -2,27 +2,32 @@ import 'package:final_project/src/pages/home_page.dart';
 import 'package:final_project/src/pages/map_page.dart';
 import 'package:final_project/src/pages/settings_page.dart';
 import 'package:flutter/material.dart';
+import 'dart:developer' as developer;
 
 
 class NavigationBarApp extends StatelessWidget {
   const NavigationBarApp({super.key});
 
+  //DARK MODE TOGGLE BOOLEAN
+  static var darkMode = false;
+
+
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.lightGreen,
-          primary: Colors.lightGreen,
-          secondary: Colors.black,
-          background: const Color.fromARGB(255, 38, 38, 38),
-          tertiary: Colors.grey,
-          
-          ),
-        ),
-      home: const NavigationExample(),
-    );
+        return MaterialApp(
+          theme: ThemeData(
+            useMaterial3: true,
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: Colors.lightGreen,
+              primary: Colors.lightGreen,
+              secondary: Colors.black,
+              background: const Color.fromARGB(255, 36, 36, 36),
+              tertiary: Colors.grey,
+              ),
+            ),
+          home: const NavigationExample(),
+        );
   }
 }
 
@@ -31,14 +36,15 @@ class NavigationExample extends StatefulWidget {
 
   @override
   // ignore: library_private_types_in_public_api
-  _NavigationExampleState createState() => _NavigationExampleState();
+  NavigationExampleState createState() => NavigationExampleState();
 }
 
-class _NavigationExampleState extends State<NavigationExample> {
+class NavigationExampleState extends State<NavigationExample> {
   
   late int _selectedPageIndex;
   late List<Widget>_pages;
   late PageController _pageController;
+  bool darkMode = false;
 
   @override
   void initState(){
@@ -46,9 +52,9 @@ class _NavigationExampleState extends State<NavigationExample> {
 
     _selectedPageIndex = 0;
     _pages = [
-      HomePage(),
+      HomePage(getTheme),
       const MapPage(),
-      SettingsPage()
+      SettingsPage(toDarkMode),
     ];
 
     _pageController = PageController(initialPage: _selectedPageIndex);
@@ -60,13 +66,27 @@ class _NavigationExampleState extends State<NavigationExample> {
     super.dispose();
   }
 
+
+  void toDarkMode(){
+    setState(() {
+      developer.log("state");
+      darkMode = !darkMode;
+    });
+  }
+
+
+  bool getTheme(){
+    return darkMode;
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: (darkMode ?  Colors.black : Colors.white),
       appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: const Text('Spotify Maps', style: TextStyle(color: Colors.white)),
+        backgroundColor: (darkMode ?  Colors.black : Colors.white),
+        title: darkMode ? const Text('Spotify Maps', style: TextStyle(color: Colors.white)) : const Text('Spotify Maps', style: TextStyle(color: Colors.black)),
       ),
       body: PageView(
         controller: _pageController,
@@ -91,7 +111,7 @@ class _NavigationExampleState extends State<NavigationExample> {
             label: 'Settings',
           ),
         ],
-        backgroundColor: Colors.black,
+        backgroundColor: (darkMode ?  Colors.black : Colors.white),
         selectedItemColor: Colors.lightGreen,
         unselectedItemColor: Colors.grey,
         showSelectedLabels: true,

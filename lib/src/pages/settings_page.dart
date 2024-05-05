@@ -1,20 +1,26 @@
 
+import 'package:final_project/src/components/bottom_navbar.dart';
 import 'package:flutter/material.dart';
+
+import 'dart:developer' as developer;
+
 
 // ignore: use_key_in_widget_constructors
 class SettingsPage extends StatefulWidget {
+    const SettingsPage(this.toDarkMode);
+    final VoidCallback toDarkMode;
+  
   @override
   // ignore: library_private_types_in_public_api
-  _SettingsState createState() => _SettingsState();
+  SettingsState createState() => SettingsState();
 }
 
-class _SettingsState extends State<SettingsPage> with AutomaticKeepAliveClientMixin<SettingsPage>{
+class SettingsState extends State<SettingsPage> with AutomaticKeepAliveClientMixin<SettingsPage>{
 
-  bool setting1 = true;
+  static bool darkMode = false;
   bool setting2 = true;
   bool setting3 = true;
   bool setting4 = true;
-
 
   @override
   Widget build(BuildContext context) {
@@ -23,18 +29,20 @@ class _SettingsState extends State<SettingsPage> with AutomaticKeepAliveClientMi
       body: ListView(
         children: <Widget>[
           SwitchListTile(
-            tileColor: Theme.of(context).colorScheme.secondary,
-            title: const Text('Setting 1', style: TextStyle(color: Colors.white)),
-            value: setting1,
-            onChanged:(bool? value) {
+            tileColor: (darkMode ? Colors.black : Colors.white),
+            title: (darkMode ? const Text('Dark Mode', style: TextStyle(color: Colors.white)) : const Text('Setting 2', style: TextStyle(color: Colors.black))),
+            value: darkMode,
+            onChanged:(bool value) {
               setState(() {
-                setting1 = value!;
+                developer.log("entered state");
+                  widget.toDarkMode();
+                  darkMode = !darkMode;
               });
              },
           ),
           SwitchListTile(
-            tileColor: Theme.of(context).colorScheme.secondary,
-            title: const Text('Setting 2', style: TextStyle(color: Colors.white)),
+            tileColor: (darkMode ? Colors.black : Colors.white),
+            title: (darkMode ? const Text('Setting 2', style: TextStyle(color: Colors.white)) : const Text('Setting 2', style: TextStyle(color: Colors.black))),
             value: setting2,
             onChanged:(bool? value) {
               setState(() {
@@ -43,8 +51,8 @@ class _SettingsState extends State<SettingsPage> with AutomaticKeepAliveClientMi
              },
           ),
           SwitchListTile(
-            tileColor: Theme.of(context).colorScheme.secondary,
-            title: const Text('Setting 3', style: TextStyle(color: Colors.white)),
+            tileColor: (darkMode ? Colors.black : Colors.white),
+            title: (darkMode ? const Text('Setting 2', style: TextStyle(color: Colors.white)) : const Text('Setting 2', style: TextStyle(color: Colors.black))),
             value: setting3,
             onChanged:(bool? value) {
               setState(() {
@@ -53,8 +61,8 @@ class _SettingsState extends State<SettingsPage> with AutomaticKeepAliveClientMi
              },
           ),
           SwitchListTile(
-            tileColor: Theme.of(context).colorScheme.secondary,
-            title: const Text('Setting 4', style: TextStyle(color: Colors.white)),
+            tileColor: (darkMode ? Colors.black : Colors.white),
+            title: (darkMode ? const Text('Setting 2', style: TextStyle(color: Colors.white)) : const Text('Setting 2', style: TextStyle(color: Colors.black))),
             value: setting4,
             onChanged:(bool? value) {
               setState(() {

@@ -12,8 +12,6 @@ import 'package:map/map.dart';
 import 'dart:async';
 import 'dart:convert';
 
-import 'dart:developer' as dev;
-
 
 
 class MapPage extends StatefulWidget {
@@ -89,8 +87,8 @@ class MarkersPageState extends State<MapPage> {
     }
   }
 
-  Widget buildMarkerWidget(Offset pos, Color color, musicItem,
-      [IconData icon = Icons.location_on]) {
+  Widget buildMarkerWidget(Offset pos, musicItem,
+      [IconData icon = Icons.music_video]) {
     return Positioned(
       left: pos.dx - 24,
       top: pos.dy - 24,
@@ -99,7 +97,7 @@ class MarkersPageState extends State<MapPage> {
       child: GestureDetector(
         child: Icon(
           icon,
-          color: color,
+          color: Colors.primaries[2],
           size: 48,
         ),
         onTap: () {
@@ -108,11 +106,14 @@ class MarkersPageState extends State<MapPage> {
             builder: (context) => AlertDialog(
               backgroundColor: Theme.of(context).colorScheme.secondary,
               content: Column(
+                
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  Text(musicItem["name"], style: const TextStyle(color: Colors.white)),
-                  Text("Artist: ${musicItem["artist"]}", style: const TextStyle(color: Colors.white)),
-                  Text("Album: ${musicItem["album"]}", style: const TextStyle(color: Colors.white))
+                  Padding(padding: const EdgeInsets.only(top: 30, bottom: 20),
+                  child: Container(color: Colors.red, width: 200, height: 200)),
+                  Text(musicItem["name"], style: const TextStyle(color: Colors.white, fontSize:18, fontWeight: FontWeight.bold)),
+                  Text(musicItem["artist"], style: const TextStyle(color: Colors.grey, fontSize: 18, )),
+                  Text(musicItem["album"], style: const TextStyle(color: Colors.grey))
                 ],
               ),
             ),
@@ -137,7 +138,7 @@ class MarkersPageState extends State<MapPage> {
 
           //LatLng(Angle.degree(HomeState.lat), Angle.degree(HomeState.long))
           final markerWidgets = items.map(
-            (musicItem) => buildMarkerWidget(transformer.toOffset(LatLng(Angle.degree(musicItem["lat"]), Angle.degree(musicItem["long"]))), Colors.red, musicItem),
+            (musicItem) => buildMarkerWidget(transformer.toOffset(LatLng(Angle.degree(musicItem["lat"]), Angle.degree(musicItem["long"]))), musicItem),
 
           );
 

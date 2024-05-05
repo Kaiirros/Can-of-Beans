@@ -6,28 +6,31 @@ import 'dart:developer' as developer;
 
 // ignore: use_key_in_widget_constructors
 class HomePage extends StatefulWidget {
+  const HomePage(this.darkMode, {super.key});
+  final Function darkMode;
+
 
   @override
   // ignore: library_private_types_in_public_api
   HomeState createState() => HomeState();
   
 }
-
-
 class HomeState extends State<HomePage> with AutomaticKeepAliveClientMixin<HomePage>{
-
   static double long = 0;
   static double lat = 0;
+  bool theme = false;
  
   @override
   void initState(){
     super.initState();
     setCoords();
   }
+
+
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: theme? const Color.fromARGB(255, 36, 36, 36) : const Color.fromARGB(255, 188, 188, 188),
       body: Center(
           child: Text("lat: $lat, long: $long", style: const TextStyle( color: Colors.white)),
         ),
