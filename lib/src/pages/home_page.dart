@@ -42,7 +42,26 @@ void setTheme(bool theme){
     return Scaffold(
       backgroundColor: darkTheme? const Color.fromARGB(255, 36, 36, 36) : const Color.fromARGB(255, 188, 188, 188),
       body: Center(
-          child: darkTheme? Text("lat: $lat, long: $long", style: const TextStyle( color: Colors.white)) : Text("lat: $lat, long: $long", style: const TextStyle( color: Colors.black)),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 50, bottom: 20),
+          child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget> [
+            darkTheme? const Text("Currently listening to...", style: TextStyle( color: Colors.white, fontSize: 20)) : const Text("Currently listening to...", style: TextStyle( color: Colors.black, fontSize: 20)) ,
+            Padding( padding: const EdgeInsets.only(top: 20, bottom: 20), child: Container(width: 200, height: 200, color: Colors.lightGreenAccent)),
+            darkTheme? const Text("Island In The Sun", style: TextStyle( color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)) : const Text("Island In The Sun", style: TextStyle( color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold)),
+            darkTheme? const Text("Weezer", style: TextStyle( color: Colors.grey, fontSize: 19, )) : const Text("Weezer", style: TextStyle( color: Color.fromARGB(255, 102, 102, 102), fontSize: 19, )),
+            darkTheme? const Text("Weezer", style: TextStyle( color: Colors.grey, fontSize: 17, )) : const Text("Weezer", style: TextStyle( color: Color.fromARGB(255, 102, 102, 102), fontSize: 17, )),
+            const Spacer(),
+            Column(
+                children: <Widget>[
+                  darkTheme? const Text("Your current location", style: TextStyle( color: Colors.white, fontSize: 20)) : const Text("Your current location", style: TextStyle( color: Colors.black, fontSize: 20)) ,
+                  darkTheme? Text("$lat, $long", style: const TextStyle( color: Colors.white, fontSize: 20)) : Text("$lat, $long", style: const TextStyle( color: Colors.black, fontSize: 20)),
+              ],
+            ),
+        ], 
+        ),
+        ),
         ),
       );
   }

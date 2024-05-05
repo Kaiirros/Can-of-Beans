@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:final_project/src/pages/home_page.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import '../utils/tile_servers.dart';
 import '../utils/utils.dart';
 import 'package:flutter/gestures.dart';
@@ -88,7 +89,7 @@ class MarkersPageState extends State<MapPage> {
   }
 
   Widget buildMarkerWidget(Offset pos, musicItem,
-      [IconData icon = Icons.music_video]) {
+      [IconData icon = Icons.circle]) {
     return Positioned(
       left: pos.dx - 24,
       top: pos.dy - 24,
@@ -97,8 +98,8 @@ class MarkersPageState extends State<MapPage> {
       child: GestureDetector(
         child: Icon(
           icon,
-          color: Colors.primaries[2],
-          size: 48,
+          color: const Color.fromARGB(150, 78, 232, 94),
+          size: 72,
         ),
         onTap: () {
           showDialog(
@@ -110,8 +111,8 @@ class MarkersPageState extends State<MapPage> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Padding(padding: const EdgeInsets.only(top: 30, bottom: 20),
-                  child: Container(color: Colors.red, width: 200, height: 200)),
-                  Text(musicItem["name"], style: const TextStyle(color: Colors.white, fontSize:18, fontWeight: FontWeight.bold)),
+                  child: Container(color: Colors.lightGreenAccent, width: 200, height: 200)),
+                  Text(musicItem["name"], style: const TextStyle(color: Colors.white, fontSize:18, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
                   Text(musicItem["artist"], style: const TextStyle(color: Colors.grey, fontSize: 18, )),
                   Text(musicItem["album"], style: const TextStyle(color: Colors.grey))
                 ],
@@ -125,71 +126,76 @@ class MarkersPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: MapLayout(
-        controller: controller,
-        builder: (context, transformer) {
+    return Stack(
+      children: <Widget>[
+        Scaffold(
+          body: MapLayout(
+            controller: controller,
+            builder: (context, transformer) {
 
-          readJson();
-          final markerWidgets = items.map(
-            (musicItem) => buildMarkerWidget(transformer.toOffset(LatLng(Angle.degree(musicItem["lat"]), Angle.degree(musicItem["long"]))), musicItem),
+              readJson();
+              final markerWidgets = items.map(
+                (musicItem) => buildMarkerWidget(transformer.toOffset(LatLng(Angle.degree(musicItem["lat"]), Angle.degree(musicItem["long"]))), musicItem),
 
-          );
+              );
 
 
-          return GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onDoubleTapDown: (details) => _onDoubleTap(
-              transformer,
-              details.localPosition,
-            ),
-            onScaleStart: _onScaleStart,
-            onScaleUpdate: (details) => _onScaleUpdate(details, transformer),
-            child: Listener(
-              behavior: HitTestBehavior.opaque,
-              onPointerSignal: (event) {
-                if (event is PointerScrollEvent) {
-                  final delta = event.scrollDelta.dy / -1000.0;
-                  final zoom = clamp(controller.zoom + delta, 2, 18);
+              return GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onDoubleTapDown: (details) => _onDoubleTap(
+                  transformer,
+                  details.localPosition,
+                ),
+                onScaleStart: _onScaleStart,
+                onScaleUpdate: (details) => _onScaleUpdate(details, transformer),
+                child: Listener(
+                  behavior: HitTestBehavior.opaque,
+                  onPointerSignal: (event) {
+                    if (event is PointerScrollEvent) {
+                      final delta = event.scrollDelta.dy / -1000.0;
+                      final zoom = clamp(controller.zoom + delta, 2, 18);
 
-                  transformer.setZoomInPlace(zoom, event.localPosition);
-                  setState(() {});
-                }
-              },
-              child: Stack(
-                children: [
-                  TileLayer(
-                    builder: (context, x, y, z) {
-                      final tilesInZoom = pow(2.0, z).floor();
+                      transformer.setZoomInPlace(zoom, event.localPosition);
+                      setState(() {});
+                    }
+                  },
+                  child: Stack(
+                    children: [
+                      TileLayer(
+                        builder: (context, x, y, z) {
+                          final tilesInZoom = pow(2.0, z).floor();
 
-                      while (x < 0) {
-                        x += tilesInZoom;
-                      }
-                      while (y < 0) {
-                        y += tilesInZoom;
-                      }
+                          while (x < 0) {
+                            x += tilesInZoom;
+                          }
+                          while (y < 0) {
+                            y += tilesInZoom;
+                          }
 
-                      x %= tilesInZoom;
-                      y %= tilesInZoom;
+                          x %= tilesInZoom;
+                          y %= tilesInZoom;
 
-                      return CachedNetworkImage(
-                        imageUrl: google(z, x, y),
-                        fit: BoxFit.cover,
-                      );
-                    },
+                          return CachedNetworkImage(
+                            imageUrl: google(z, x, y),
+                            fit: BoxFit.cover,
+                          );
+                        },
+                      ),
+                      ...markerWidgets,
+                    ],
                   ),
-                  ...markerWidgets,
-                ],
-              ),
-            ),
-          );
-        },
+                ),
+              );
+            },
+          ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: _gotoDefault,
+          tooltip: 'My Location',
+          child: const Icon(Icons.my_location),
+        ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _gotoDefault,
-        tooltip: 'My Location',
-        child: const Icon(Icons.my_location),
-      ),
+      Container(alignment: Alignment.topCenter, child: const Text("Showing nearby listening history", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)) )
+      ],
     );
   }
 }

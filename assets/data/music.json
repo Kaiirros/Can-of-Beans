@@ -4,7 +4,7 @@
         "name": "Song 2",
         "album": "Blur: The Best Of",
         "artist": "Blur",
-        "lat": 37.4219000,
+        "lat": 37.412020,
         "long": -122.095
     },
     {
@@ -26,7 +26,7 @@
         "album": "In the Land Of",
         "artist": "Wintersleep",
         "lat": 37.4239990,
-        "long": -122.105
+        "long": -122.08005
     },
     {
         "name": "Selfless",
@@ -34,6 +34,44 @@
         "artist": "The Strokes",
         "lat": 37.4259980,
         "long": -122.101
+    },
+
+
+
+    {
+        "name": "Help I'm Alive",
+        "album": "Fantasies",
+        "artist": "Metric",
+        "lat": 37.410020,
+        "long": -122.08005
+    },
+    {
+        "name": "The Ground Walks, with Time in a Box",
+        "album": "Strangers to Ourselves",
+        "artist": "Modest Mouse",
+        "lat": 37.4219199,
+        "long": -122.266
+    },
+    {
+        "name": "Obstacle 2",
+        "album": "Turn on the Bright Lights",
+        "artist": "Interpol",
+        "lat": 37.3219054,
+        "long": -122.01290
+    },
+    {
+        "name": "Say It Ain't So",
+        "album": "Weezer",
+        "artist": "Weezer",
+        "lat": 37.4384590,
+        "long": -122.10211
+    },
+    {
+        "name": "Cath...",
+        "album": "Narrow Stairs",
+        "artist": "Death Cab for Cutie",
+        "lat": 37.4179080,
+        "long": -122.10211
     }
     ]
 }

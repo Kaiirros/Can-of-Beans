@@ -89,7 +89,7 @@ class NavigationExampleState extends State<NavigationExample> {
       backgroundColor: (darkMode ?  Colors.black : Colors.white),
       appBar: AppBar(
         backgroundColor: (darkMode ?  Colors.black : Colors.white),
-        title: darkMode ? const Text('Spotify Maps', style: TextStyle(color: Colors.white)) : const Text('Spotify Maps', style: TextStyle(color: Colors.black)),
+        title: darkMode ? const Text('sMaps', style: TextStyle(color: Colors.white)) : const Text('Spotify Maps', style: TextStyle(color: Colors.black)),
       ),
       body: PageView(
         controller: _pageController,
