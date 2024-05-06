@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'dart:developer' as developer;
 
@@ -59,14 +60,11 @@ class SettingsState extends State<SettingsPage> with AutomaticKeepAliveClientMix
               });
              },
           ),
-          SwitchListTile(
-            tileColor: (darkMode ? Colors.black : Colors.white),
-            title: (darkMode ? const Text('Setting 2', style: TextStyle(color: Colors.white)) : const Text('Setting 2', style: TextStyle(color: Colors.black))),
-            value: setting4,
-            onChanged:(bool? value) {
-              setState(() {
-                setting4 = value!;
-              });
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: (darkMode ? Colors.black : Colors.white)),
+            child: (darkMode ? const Text('View App Permissions', style: TextStyle(color: Colors.white)) : const Text('View App Permissions', style: TextStyle(color: Colors.black))),
+            onPressed:() {
+              openAppSettings();             
              },
           ),
 
