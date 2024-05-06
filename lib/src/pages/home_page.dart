@@ -36,9 +36,9 @@ void setTheme(bool theme){
   });
 }
 
-
+  @override
   Widget build(BuildContext context) {
-    super.build(context);
+  super.build(context);
     return Scaffold(
       backgroundColor: darkTheme? const Color.fromARGB(255, 36, 36, 36) : const Color.fromARGB(255, 188, 188, 188),
       body: Center(
@@ -57,13 +57,13 @@ void setTheme(bool theme){
                 children: <Widget>[
                   darkTheme? const Text("Your current location", style: TextStyle( color: Colors.white, fontSize: 20)) : const Text("Your current location", style: TextStyle( color: Colors.black, fontSize: 20)) ,
                   darkTheme? Text("$lat, $long", style: const TextStyle( color: Colors.white, fontSize: 20)) : Text("$lat, $long", style: const TextStyle( color: Colors.black, fontSize: 20)),
-              ],
-            ),
-        ], 
+                ],
+              ),
+            ], 
+          ),
         ),
-        ),
-        ),
-      );
+      ),
+    );
   }
   
   @override

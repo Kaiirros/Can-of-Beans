@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:final_project/src/pages/home_page.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import '../utils/tile_servers.dart';
 import '../utils/utils.dart';
 import 'package:flutter/gestures.dart';
@@ -24,6 +23,7 @@ class MapPage extends StatefulWidget {
 
 class MarkersPageState extends State<MapPage> {
 
+// Variable holders for the Geolocator coordinates (Used to determine map starting point)
   double currentLong = HomeState.long;
   double currentLat = HomeState.lat;
 
@@ -31,15 +31,10 @@ class MarkersPageState extends State<MapPage> {
     location: LatLng(Angle.degree(HomeState.lat), Angle.degree(HomeState.long)),
   );
 
-/*   final markers = [
-    const LatLng(Angle.degree(35.674), Angle.degree(51.41)),
-    const LatLng(Angle.degree(35.678), Angle.degree(51.41)),
-    const LatLng(Angle.degree(35.682), Angle.degree(51.41)),
-    const LatLng(Angle.degree(35.686), Angle.degree(51.41)),
-  ]; */
-
+// List of marker locations waiting to be built
   List items = [];
 
+// JSON parser
   Future<void> readJson() async{
     final String response = await rootBundle.loadString('assets/data/music.json');
     final data = await json.decode(response);
@@ -48,12 +43,13 @@ class MarkersPageState extends State<MapPage> {
     });
   }
 
-
+// Sets the map's starting origin to the user's location
   void _gotoDefault() {
     controller.center = LatLng(Angle.degree(HomeState.lat), Angle.degree(HomeState.long));
     setState(() {});
   }
 
+// Double tap zoom incrementation
   void _onDoubleTap(MapTransformer transformer, Offset position) {
     const delta = 0.5;
     final zoom = clamp(controller.zoom + delta, 2, 18);
@@ -69,6 +65,7 @@ class MarkersPageState extends State<MapPage> {
     _scaleStart = 1.0;
   }
 
+// Updates scale of map on zoom
   void _onScaleUpdate(ScaleUpdateDetails details, MapTransformer transformer) {
     final scaleDiff = details.scale - _scaleStart;
     _scaleStart = details.scale;
@@ -88,6 +85,7 @@ class MarkersPageState extends State<MapPage> {
     }
   }
 
+// Builds markers from latlong objects
   Widget buildMarkerWidget(Offset pos, musicItem,
       [IconData icon = Icons.circle]) {
     return Positioned(
@@ -129,11 +127,15 @@ class MarkersPageState extends State<MapPage> {
     return Stack(
       children: <Widget>[
         Scaffold(
+          
+          //MAP OBJECT
           body: MapLayout(
             controller: controller,
             builder: (context, transformer) {
 
+              // Parses JSON
               readJson();
+              //Builds markers from external JSON
               final markerWidgets = items.map(
                 (musicItem) => buildMarkerWidget(transformer.toOffset(LatLng(Angle.degree(musicItem["lat"]), Angle.degree(musicItem["long"]))), musicItem),
 

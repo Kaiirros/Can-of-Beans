@@ -3,12 +3,12 @@ import 'package:final_project/src/pages/map_page.dart';
 import 'package:final_project/src/pages/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'dart:developer' as developer;
 
+// Stream controller to send in darkMode boolean to homePage
 StreamController<bool> streamController = StreamController<bool>();
 
-class NavigationBarApp extends StatelessWidget {
-  const NavigationBarApp({super.key});
+class MainNavBar extends StatelessWidget {
+  const MainNavBar({super.key});
 
   //DARK MODE TOGGLE BOOLEAN
   static var darkMode = false;
@@ -28,20 +28,20 @@ class NavigationBarApp extends StatelessWidget {
               tertiary: Colors.grey,
               ),
             ),
-          home: const NavigationExample(),
+          home: const NavBar(),
         );
   }
 }
 
-class NavigationExample extends StatefulWidget {
-  const NavigationExample({super.key});
+class NavBar extends StatefulWidget {
+  const NavBar({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  NavigationExampleState createState() => NavigationExampleState();
+  NavBarState createState() => NavBarState();
 }
 
-class NavigationExampleState extends State<NavigationExample> {
+class NavBarState extends State<NavBar> {
   
   late int _selectedPageIndex;
   late List<Widget>_pages;
@@ -71,7 +71,6 @@ class NavigationExampleState extends State<NavigationExample> {
 
   void toDarkMode(){
     setState(() {
-      developer.log("state");
       darkMode = !darkMode;
     });
     streamController.add(darkMode);

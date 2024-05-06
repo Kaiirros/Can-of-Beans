@@ -6,7 +6,8 @@ import 'dart:developer' as developer;
 
 // ignore: use_key_in_widget_constructors
 class SettingsPage extends StatefulWidget {
-    const SettingsPage(this.toDarkMode);
+    const SettingsPage(this.toDarkMode, {super.key});
+    // Constructor to take nav bar void callback to set its own darkMode variable to true/false and set it's state
     final VoidCallback toDarkMode;
   
   @override
@@ -15,11 +16,8 @@ class SettingsPage extends StatefulWidget {
 }
 
 class SettingsState extends State<SettingsPage> with AutomaticKeepAliveClientMixin<SettingsPage>{
-
+  // Dark mode toggle boolean
   static bool darkMode = false;
-  bool setting2 = true;
-  bool setting3 = true;
-  bool setting4 = true;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +28,10 @@ class SettingsState extends State<SettingsPage> with AutomaticKeepAliveClientMix
         children: <Widget>[
           SwitchListTile(
             tileColor: (darkMode ? Colors.black : Colors.white),
-            title: (darkMode ? const Text('Dark Mode', style: TextStyle(color: Colors.white)) : const Text('Setting 2', style: TextStyle(color: Colors.black))),
+            title: (darkMode ? const Text('Dark Mode', style: TextStyle(color: Colors.white)) : const Text('Dark Mode', style: TextStyle(color: Colors.black))),
             value: darkMode,
             onChanged:(bool value) {
+              //Dark mode set state toggle
               setState(() {
                 developer.log("entered state");
                   widget.toDarkMode();
@@ -40,34 +39,15 @@ class SettingsState extends State<SettingsPage> with AutomaticKeepAliveClientMix
               });
              },
           ),
-          SwitchListTile(
-            tileColor: (darkMode ? Colors.black : Colors.white),
-            title: (darkMode ? const Text('Setting 2', style: TextStyle(color: Colors.white)) : const Text('Setting 2', style: TextStyle(color: Colors.black))),
-            value: setting2,
-            onChanged:(bool? value) {
-              setState(() {
-                setting2 = value!;
-              });
-             },
-          ),
-          SwitchListTile(
-            tileColor: (darkMode ? Colors.black : Colors.white),
-            title: (darkMode ? const Text('Setting 2', style: TextStyle(color: Colors.white)) : const Text('Setting 2', style: TextStyle(color: Colors.black))),
-            value: setting3,
-            onChanged:(bool? value) {
-              setState(() {
-                setting3 = value!;
-              });
-             },
-          ),
+          // Elevated button which takes you to the app's permissions (Does not work on Chrome)
           ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: (darkMode ? Colors.black : Colors.white)),
             child: (darkMode ? const Text('View App Permissions', style: TextStyle(color: Colors.white)) : const Text('View App Permissions', style: TextStyle(color: Colors.black))),
             onPressed:() {
+              // Permission Handler component function
               openAppSettings();             
              },
           ),
-
         ],
       )
     );
